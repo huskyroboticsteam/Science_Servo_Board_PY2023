@@ -17,8 +17,13 @@
 #include "main.h"
 #include "cyapicallbacks.h"
 #include "CAN_Stuff.h"
+#include "CANScience.h"
 #include "FSM_Stuff.h"
 #include "HindsightCAN/CANLibrary.h"
+#include "Port.h"
+#include "PCA9685.h"
+#include "cam_servo.h"
+
 
 // LED stuff
 volatile uint8_t CAN_time_LED = 0;
@@ -28,8 +33,7 @@ volatile uint8_t ERROR_time_LED = 0;
 char txData[TX_DATA_SIZE];
 
 // CAN stuff
-CANPacket can_recieve;
-CANPacket can_send;
+CANPacket received;
 uint8 address = 0;
 
 CY_ISR(Period_Reset_Handler) {
@@ -51,50 +55,25 @@ CY_ISR(Button_1_Handler) {
 int main(void)
 { 
     Initialize();
-    int err;
+    volatile int error;
     
     for(;;)
     {
-        err = 0;
-        switch(GetState()) {
-            case(UNINIT):
-                SetStateTo(CHECK_CAN);
-                break;
-            case(CHECK_CAN):
-                if (!PollAndReceiveCANPacket(&can_recieve)) {
-                    LED_CAN_Write(ON);
-                    CAN_time_LED = 0;
-                    err = ProcessCAN(&can_recieve, &can_send);
-                }
-                if (GetMode() == MODE1)
-                    SetStateTo(DO_MODE1);
-                else 
-                    SetStateTo(CHECK_CAN);
-                break;
-            case(DO_MODE1):
-                // mode 1 tasks
-                SetStateTo(CHECK_CAN);
-                break;
-            default:
-                err = ERROR_INVALID_STATE;
-                SetStateTo(UNINIT);
-                break;
+        if (!error) {
+            int ID = GetPacketID(&received);
+            if (ID == ID_SCIENCE_SERVO_SET) {
+                uint8_t servoID = GetScienceServoAngleFromPacket(&received);
+                uint8_t angle = GetScienceServoAngleFromPacket(&received);
+                set_servo_position(servoID, angle);
+            }
         }
-        
-        if (err) DisplayErrorCode(err);
-        
-        if (DBG_UART_SpiUartGetRxBufferSize()) {
-            DebugPrint(DBG_UART_UartGetByte());
-        }
-        
-        CyDelay(100);
     }
 }
 
 void Initialize(void) {
     CyGlobalIntEnable; /* Enable global interrupts. LED arrays need this first */
     
-    address = getSerialAddress();
+    // address = getSerialAddress(); Need to choose address for this board
     
     DBG_UART_Start();
     sprintf(txData, "Dip Addr: %x \r\n", address);
@@ -102,8 +81,10 @@ void Initialize(void) {
     
     LED_DBG_Write(0);
     
-    InitCAN(0x4, (int)address);
+    InitCAN(DEVICE_GROUP_GPIO_BOARDS, (int)address); // Board group as GPIO?
     Timer_Period_Reset_Start();
+    
+    pca_init();
 
     isr_Button_1_StartEx(Button_1_Handler);
     isr_Period_Reset_StartEx(Period_Reset_Handler);
@@ -124,19 +105,7 @@ void DebugPrint(char input) {
     Print(txData);
 }
 
-int getSerialAddress() {
-    int address = 0;
-    
-    if (DIP1_Read()==0) address += 1;
-    if (DIP2_Read()==0) address += 2;
-    if (DIP3_Read()==0) address += 4;
-    if (DIP4_Read()==0) address += 8;
-    
-    if (address == 0)
-        address = DEVICE_SERIAL_TELEM_LOCALIZATION;
 
-    return address;
-}
 
 void DisplayErrorCode(uint8_t code) {    
     ERROR_time_LED = 0;
