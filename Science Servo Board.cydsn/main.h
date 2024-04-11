@@ -24,10 +24,14 @@
 #define PrintInt(integer) DBG_UART_UartPutString(itoa(integer, txData, 10))
 #define PrintIntBin(integer) DBG_UART_UartPutString(itoa(integer, txData, 2))
 
+#define CAM_SERVO_1 0x6
+#define CAM_SERVO_2 0x7
+
 void Initialize(void);
 int getSerialAddress();
 void DebugPrint(char input);
 void DisplayErrorCode(uint8_t code);
+void set_servo_position(uint8_t servo, uint8_t position);
 
 
 /* [] END OF FILE */
