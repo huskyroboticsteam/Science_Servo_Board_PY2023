@@ -25,12 +25,14 @@
     <Group key="Pin">
       <Data key="1e8842ba-71ab-4752-acd5-c7b9575c6400" value="DIP4" />
       <Data key="2a7b9377-17d7-4086-b420-5d26b01bb37d" value="SWCLK" />
-      <Data key="3dbba19d-7851-4a83-b204-a0a386fe8d68/5382e105-1382-4a2e-b9f4-3bb2feba71e0" value="IMU_I2C_sda" />
-      <Data key="3dbba19d-7851-4a83-b204-a0a386fe8d68/22863ebe-a37b-476f-b252-6e49a8c00b12" value="IMU_I2C_scl" />
+      <Data key="3dbba19d-7851-4a83-b204-a0a386fe8d68/5382e105-1382-4a2e-b9f4-3bb2feba71e0" value="I2C_sda" />
+      <Data key="3dbba19d-7851-4a83-b204-a0a386fe8d68/22863ebe-a37b-476f-b252-6e49a8c00b12" value="I2C_scl" />
       <Data key="8d318d8b-cf7b-4b6b-b02c-ab1c5c49d0ba" value="DIP1" />
-      <Data key="43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/23b8206d-1c77-4e61-be4a-b4037d5de5fc" value="GPS_UART_tx" />
-      <Data key="43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/78e33e5d-45ea-4b75-88d5-73274e8a7ce4" value="GPS_UART_rx" />
+      <Data key="43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/23b8206d-1c77-4e61-be4a-b4037d5de5fc" value="DBG_UART_tx" />
+      <Data key="43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/78e33e5d-45ea-4b75-88d5-73274e8a7ce4" value="DBG_UART_rx" />
       <Data key="55e4ee15-7eea-46a5-90dd-1e5fd00ff7de" value="LED_CAN" />
+      <Data key="99a54865-2e0c-4e8b-8979-f2d08319ddba" value="Dip_3" />
+      <Data key="2191e2b0-f8f5-4999-991d-75baf300fdf4" value="Dip_1" />
       <Data key="6449ccd2-1406-4c9a-8666-02f6117ba507" value="EXT_CLK" />
       <Data key="32293a45-e7c6-4687-8ad9-5915bec75bae" value="Fake_clk" />
       <Data key="750939a5-8f60-4c5f-9d51-680523087060" value="EXT_CLK" />
@@ -38,15 +40,19 @@
       <Data key="77715107-f8d5-47e5-a629-0fb83101ac6b" value="DIP2" />
       <Data key="a6b71814-8c99-4b2e-9c66-2e83029c3d9c/23b8206d-1c77-4e61-be4a-b4037d5de5fc" value="DEBUG_tx" />
       <Data key="a6b71814-8c99-4b2e-9c66-2e83029c3d9c/78e33e5d-45ea-4b75-88d5-73274e8a7ce4" value="DEBUG_rx" />
+      <Data key="a94963b1-1f41-40df-957b-9de684a05822" value="DBG_LED" />
+      <Data key="aa7b3951-46cc-45cd-8703-af15b544fdcd" value="CAN_LED" />
       <Data key="aa58a004-c402-40e0-9ff5-87b032aba07d" value="Button_1" />
       <Data key="b84dbcf6-f26d-44a5-801d-09d588384840" value="IMU_RST" />
       <Data key="b561a610-e1ca-4f8c-9281-59a70030b09c/23b8206d-1c77-4e61-be4a-b4037d5de5fc" value="DBG_UART_tx" />
       <Data key="b561a610-e1ca-4f8c-9281-59a70030b09c/78e33e5d-45ea-4b75-88d5-73274e8a7ce4" value="DBG_UART_rx" />
+      <Data key="cc6bc75b-64eb-421a-ab21-42a67353811a" value="Dip_4" />
       <Data key="cda343a7-a70d-4278-90ef-7776c8b47560" value="LED_DBG" />
       <Data key="d62b3792-ccc7-4dfd-adc8-b5822c6245ca" value="SWDIO" />
-      <Data key="e851a3b9-efb8-48be-bbb8-b303b216c393" value="LED_ERR" />
+      <Data key="e851a3b9-efb8-48be-bbb8-b303b216c393" value="ERR_LED" />
       <Data key="e3689af5-c003-445f-92c0-77e8997a796d" value="DIP3" />
       <Data key="ed092b9b-d398-4703-be89-cebf998501f6" value="CAN_TX" />
+      <Data key="f4aa77f2-7f08-4cf0-a8ef-c2eec1eb35ad" value="Dip_2" />
     </Group>
   </Group>
   <Group key="FlashSecurity">
@@ -3903,12 +3909,12 @@
     </Group>
     <Group key="43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/23b8206d-1c77-4e61-be4a-b4037d5de5fc">
       <Group key="0">
-        <Data key="Port Format" value="2,1" />
+        <Data key="Port Format" value="3,1" />
       </Group>
     </Group>
     <Group key="43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/78e33e5d-45ea-4b75-88d5-73274e8a7ce4">
       <Group key="0">
-        <Data key="Port Format" value="2,0" />
+        <Data key="Port Format" value="3,0" />
       </Group>
     </Group>
     <Group key="55e4ee15-7eea-46a5-90dd-1e5fd00ff7de">
@@ -3949,6 +3955,16 @@
     <Group key="a6b71814-8c99-4b2e-9c66-2e83029c3d9c/78e33e5d-45ea-4b75-88d5-73274e8a7ce4">
       <Group key="0">
         <Data key="Port Format" value="7,0" />
+      </Group>
+    </Group>
+    <Group key="a94963b1-1f41-40df-957b-9de684a05822">
+      <Group key="0">
+        <Data key="Port Format" value="4,5" />
+      </Group>
+    </Group>
+    <Group key="aa7b3951-46cc-45cd-8703-af15b544fdcd">
+      <Group key="0">
+        <Data key="Port Format" value="4,4" />
       </Group>
     </Group>
     <Group key="aa58a004-c402-40e0-9ff5-87b032aba07d">
