@@ -23,21 +23,13 @@
 #define SERVO6 5
 #define SERVO7 6
 #define SERVO8 7
+#define SERVO9 8
+#define SERVO10 9
 
-#define SERVO_COUNT 8
+#define SERVO_COUNT 10
 #define SERVO_MAX_ANGLE 180
 #define SERVO_MIN_ANGLE 0
-#define CONT_SERVO_MAX_ANGLE -100
-#define CONT_SERVO_MIN_ANGLE 100
-
-#define CONT_SERVO1 9
-#define CONT_SERVO2 8
-#define CONT_SERVO_SPARE 15
-
-#define LAZY_SUSAN CONT_SERVO1
 
 int set_servo_position(int servo, int degrees);
-int set_servo_continuous(int servo, int power);
-void reset_servo_cont();
 
 /* [] END OF FILE */

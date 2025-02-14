@@ -28,9 +28,8 @@
 #define SERVO_SELECT    (uint8_t) 0x2    
 // MODE DECLARATIONS
 #define MICHAEL_MODE        (uint8_t) 0x0 // default mode
-#define LAZY_SUSAN_MODE     (uint8_t) 0x1
-#define SCI_SERVO_MODE      (uint8_t) 0x2
-#define CONT_SERVO_MODE     (uint8_t) 0x3
+#define SCI_SERVO_MODE      (uint8_t) 0x1
+// Need to add more mode based on the servo's funcationality
     
 void UART_FSM(char rxByte);
 
@@ -67,7 +66,6 @@ void servoSelectAction(char rxByte);
 
 void setScienceServo();
 
-void setContinuousScienceServo();
 
 #endif // __FSM__
 

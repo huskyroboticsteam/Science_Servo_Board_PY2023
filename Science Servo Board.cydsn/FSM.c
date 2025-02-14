@@ -77,10 +77,11 @@ void resetAllServos() {
     for (uint8_t i = 0; i < SERVO_COUNT; i++) {
         servoPosList[i] = 0;   
     }
+    servoID = 0;
 }
 
 // State Actions
-
+// Need to add on it once i know modes of servo
 void idleAction(char rxByte) {
     Print("\r\n");
     Print("Select Mode:\r\n");
@@ -89,6 +90,7 @@ void idleAction(char rxByte) {
     Print("\tc: Continuous Servos\r\n");
     setVal(0);
     setSign(1);
+/*
     switch (rxByte) {
         case 'l':
             setFSMMode(LAZY_SUSAN_MODE);
@@ -115,14 +117,14 @@ void idleAction(char rxByte) {
             break;
         default:
             DebugPrint(rxByte);
-    }   
+    }  */ 
 }
 
 void readDataAction(char rxByte) {
     if (rxByte == '\r' || rxByte == '\n') {
         if (!pos) setVal(-1*val);
         Print("\r\n");
-        switch (mode) {
+        /*switch (mode) {
             case LAZY_SUSAN_MODE:
                 setFlag(1);
                 
@@ -138,7 +140,7 @@ void readDataAction(char rxByte) {
             default:
                 resetFSM();
                 DebugPrint(rxByte);
-        }
+        }*/
     } else if (rxByte == '-') {
         if (!val) {
             setSign(0);
@@ -166,7 +168,7 @@ void servoSelectAction(char rxByte) {
         Print("Invalid Servo ID. Try Again.");
         setServoID(0);;
     } else {
-        if (mode == SCI_SERVO_MODE) {
+        /*if (mode == SCI_SERVO_MODE) {
             setFSMState(READ_SET_DATA);
             Print("Position: ");
         } else if (mode == CONT_SERVO_MODE) {
@@ -174,7 +176,7 @@ void servoSelectAction(char rxByte) {
             Print("Power: ");
         } else {
             resetFSM();
-        }
+        } */
     }   
 }
 
@@ -196,22 +198,6 @@ void setScienceServo() {
     }   
 }
 
-void setContinuousScienceServo() {
-    if (val >= CONT_SERVO_MIN_ANGLE && val <= CONT_SERVO_MAX_ANGLE) {
-        setFlag(3);
-        
-        setFSMState(IDLE);
-        setFSMMode(MICHAEL_MODE);
-    } else {
-        char txData[200];
-        setVal(0);
-        setSign(1);
-        Print("Invalid angle entered. Continuous servo power must be between");
-        sprintf(txData, "%d and %d\r\n", CONT_SERVO_MIN_ANGLE, CONT_SERVO_MAX_ANGLE);
-        Print(txData);
-        Print("Power: ");
-    }
-}
 
 /* [] END OF FILE */
 
